@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns="http://www.springframework.org/schema/beans"
+       xmlns:c="http://www.springframework.org/schema/c"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:util="http://www.springframework.org/schema/util"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/util
+        http://www.springframework.org/schema/util/spring-util.xsd">
+
+    <bean class="com.example.soundsystem.SgtPeppers" id="sgtPeppers"/>
+    <bean id="cdPlayer" class="com.example.soundsystem.CDPlayer">
+        <constructor-arg ref="sgtPeppers"/>
+    </bean>
+    <bean class="com.example.soundsystem.BlankDisc" id="blankDisc">
+        <property name="title" value="Summertime"/>
+        <property name="artist" value="The Beatles"/>
+        <property name="tracks">
+            <list>
+                <value>Track 1</value>
+                <value>Track 2</value>
+                <value>Track 3</value>
+                <value>Track 4</value>
+            </list>
+        </property>
+    </bean>
+    <bean class="com.example.soundsystem.BlankDisc" id="anotherBlankDisc"
+          c:artist="The Beatles" c:title="Crawling" c:tracks-ref="crawlingTrackList"/>
+    <bean class="com.example.soundsystem.CDPlayer" id="anotherCDPlayer" c:_-ref="anotherBlankDisc"/>
+    <util:list id="crawlingTrackList">
+        <value>CTrack1</value>
+        <value>CTrack2</value>
+        <value>CTrack3</value>
+        <value>CTrack4</value>
+    </util:list>
+</beans>
